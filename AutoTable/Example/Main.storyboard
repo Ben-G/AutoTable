@@ -21,6 +21,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="xaB-dV-2cx">
+                                        <barButtonItem key="leftBarButtonItem" title="Rename All" id="eiu-S8-O6b">
+                                            <connections>
+                                                <action selector="renameAll:" destination="yG6-YU-vQG" id="cmi-xL-Uwy"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Add" id="qjJ-YY-fmS">
                                             <connections>
                                                 <action selector="addUser:" destination="yG6-YU-vQG" id="zMI-4X-YTu"/>

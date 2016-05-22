@@ -11,6 +11,7 @@ import UIKit
 enum Changeset {
     case Add(NSIndexPath)
     case Delete(NSIndexPath)
+    case RefreshOnly
 }
 
 
@@ -19,7 +20,7 @@ struct CellTypeDefinition {
     let cellIdentifier: String
 }
 
-public final class TableViewRenderer: NSObject {
+public final class TableViewShim: NSObject {
 
     var tableViewModel: TableViewModel? = nil {
         didSet {
@@ -65,12 +66,14 @@ public final class TableViewRenderer: NSObject {
                 [indexPath],
                 withRowAnimation: .Automatic
             )
+        case .RefreshOnly:
+            self.tableView.reloadData()
         }
     }
 
 }
 
-extension TableViewRenderer: UITableViewDataSource, UITableViewDelegate {
+extension TableViewShim: UITableViewDataSource, UITableViewDelegate {
 
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self._tableViewModel.sections.count

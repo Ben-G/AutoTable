@@ -11,7 +11,7 @@ import UIKit
 class UserListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-    var tableViewRenderer: TableViewRenderer!
+    var tableViewRenderer: TableViewShim!
 
     var users: [User] = [
         User(username: "A"),
@@ -21,7 +21,7 @@ class UserListViewController: UIViewController {
     ]
 
     override func viewDidLoad() {
-        self.tableViewRenderer = TableViewRenderer(cellTypes: [
+        self.tableViewRenderer = TableViewShim(cellTypes: [
             CellTypeDefinition(
                 nibFilename: "UserCell",
                 cellIdentifier: "UserCell"
@@ -64,6 +64,16 @@ class UserListViewController: UIViewController {
         )
     }
 
-    
+    @IBAction func renameAll(sender: AnyObject) {
+        self.users = self.users.map { _ in User(username: "New Name") }
+
+        self.tableViewRenderer.newViewModelWithChangeset(
+            tableViewModelForUserList(
+                users,
+                deleteClosure: deleteUser
+            ),
+            changeSet: .RefreshOnly
+        )
+    }
 
 }
