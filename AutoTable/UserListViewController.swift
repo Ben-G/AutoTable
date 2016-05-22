@@ -11,8 +11,7 @@ import UIKit
 class UserListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-
-    let tableViewRenderer: TableViewRenderer!
+    var tableViewRenderer: TableViewRenderer!
 
     var users: [User] = [
         User(username: "A"),
@@ -21,31 +20,17 @@ class UserListViewController: UIViewController {
         User(username: "D")
     ]
 
-    init() {
+    override func viewDidLoad() {
         self.tableViewRenderer = TableViewRenderer(cellTypes: [
             CellTypeDefinition(
                 nibFilename: "UserCell",
                 cellIdentifier: "UserCell"
-            )
-        ])
-
-        super.init(nibName: nil, bundle: nil)
+            )], tableView: tableView)
 
         self.tableViewRenderer.tableViewModel = tableViewModelForUserList(
             users,
             deleteClosure: deleteUser
         )
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        self.init()
-    }
-
-    override func viewDidLoad() {
-        self.tableViewRenderer.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        self.tableViewRenderer.frame = self.view.bounds
-
-        self.view.addSubview(self.tableViewRenderer)
     }
 
     // MARK: Table Changes
@@ -61,7 +46,7 @@ class UserListViewController: UIViewController {
                 deleteClosure: deleteUser
             ),
             changeSet: .Add(NSIndexPath(
-                forRow: self.users.count,
+                forRow: self.users.count - 1,
                 inSection: 0
             ))
         )

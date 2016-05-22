@@ -45,6 +45,9 @@
                             <constraint firstItem="pZc-3c-6Lh" firstAttribute="leading" secondItem="EAT-rC-K4u" secondAttribute="leading" id="rKi-WX-Fhb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="pZc-3c-6Lh" id="y1a-sE-UUE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RnC-G4-2mS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

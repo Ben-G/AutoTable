@@ -19,9 +19,7 @@ struct CellTypeDefinition {
     let cellIdentifier: String
 }
 
-public final class TableViewRenderer: UIView {
-
-    var view: UIView { return self }
+public final class TableViewRenderer: NSObject {
 
     var tableViewModel: TableViewModel? = nil {
         didSet {
@@ -37,29 +35,21 @@ public final class TableViewRenderer: UIView {
 
     let tableView: UITableView
 
-    init(cellTypes: [CellTypeDefinition]) {
+    init(cellTypes: [CellTypeDefinition], tableView: UITableView) {
         self.cellTypes = cellTypes
-
-        self.tableView = UITableView(frame: CGRect.zero)
-
-        super.init(frame: CGRect.zero)
-
-        self.tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.tableView = tableView
 
         for cellType in cellTypes {
             let nibFile = UINib(nibName: cellType.cellIdentifier, bundle: nil)
             self.tableView.registerNib(nibFile, forCellReuseIdentifier: cellType.cellIdentifier)
         }
 
-        self.addSubview(self.tableView)
+        super.init()
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 
     func newViewModelWithChangeset(newViewModel: TableViewModel, changeSet: Changeset) {
         self._tableViewModel = newViewModel
