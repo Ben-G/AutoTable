@@ -20,6 +20,7 @@
 		2550A90B1CF124DC004EA96E /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2550A90A1CF124DC004EA96E /* UserCell.swift */; };
 		2550A90D1CF1252D004EA96E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2550A90C1CF1252D004EA96E /* UserCell.xib */; };
 		2550A90F1CF13278004EA96E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2550A90E1CF13278004EA96E /* Main.storyboard */; };
+		2550A9111CF13ABE004EA96E /* IndexPathKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2550A9101CF13ABE004EA96E /* IndexPathKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		2550A90A1CF124DC004EA96E /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		2550A90C1CF1252D004EA96E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		2550A90E1CF13278004EA96E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Example/Main.storyboard; sourceTree = "<group>"; };
+		2550A9101CF13ABE004EA96E /* IndexPathKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				2550A8FD1CF122AF004EA96E /* TableViewModel.swift */,
 				2550A8FE1CF122AF004EA96E /* TableViewShim.swift */,
 				2550A8FF1CF122AF004EA96E /* TableViewSectionModel.swift */,
+				2550A9101CF13ABE004EA96E /* IndexPathKey.swift */,
 			);
 			path = AutoTable;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				2550A9031CF122AF004EA96E /* TableViewSectionModel.swift in Sources */,
 				2550A8E01CF121D4004EA96E /* AppDelegate.swift in Sources */,
 				2550A9011CF122AF004EA96E /* TableViewModel.swift in Sources */,
+				2550A9111CF13ABE004EA96E /* IndexPathKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

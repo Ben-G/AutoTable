@@ -13,6 +13,8 @@ class UserListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     var tableViewRenderer: TableViewShim!
 
+    var cellsOnScreen: [IndexPathKey: UITableViewCell] = [:]
+
     var users: [User] = [
         User(username: "A"),
         User(username: "B"),
@@ -69,7 +71,7 @@ class UserListViewController: UIViewController {
 
         self.tableViewRenderer.newViewModelWithChangeset(
             tableViewModelForUserList(
-                users,
+                self.users,
                 deleteClosure: deleteUser
             ),
             changeSet: .RefreshOnly

@@ -14,16 +14,25 @@ struct TableViewCellModel {
     let cellIdentifier: String
     let canEdit: Bool
     let commitEditingClosure: CommitEditingClosure?
-    let applyViewModelToCell: (UITableViewCell) -> Void
+    let applyViewModelToCell: (UITableViewCell, Any) -> Void
+    let customData: Any
 
     init(
         cellIdentifier: String,
-        applyViewModelToCell: (UITableViewCell) -> Void,
-        commitEditingClosure: CommitEditingClosure? = nil
+        applyViewModelToCell: (UITableViewCell, Any) -> Void,
+        commitEditingClosure: CommitEditingClosure? = nil,
+        customData: Any
     ) {
         self.cellIdentifier = cellIdentifier
         self.applyViewModelToCell = applyViewModelToCell
         self.commitEditingClosure = commitEditingClosure
         self.canEdit = true
+        self.customData = customData
+    }
+}
+
+extension TableViewCellModel {
+    func applyViewModelToCell(cell: UITableViewCell) {
+        self.applyViewModelToCell(cell, self.customData)
     }
 }

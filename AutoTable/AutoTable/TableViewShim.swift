@@ -22,19 +22,13 @@ struct CellTypeDefinition {
 
 public final class TableViewShim: NSObject {
 
-    var tableViewModel: TableViewModel? = nil {
-        didSet {
-            self._tableViewModel = tableViewModel!
-            self.tableView.setEditing(tableViewModel?.editingMode ?? false, animated: true)
-            self.tableView.reloadData()
-        }
-    }
-
-    private var _tableViewModel: TableViewModel!
+    var tableViewModel: TableViewModel!
 
     let cellTypes: [CellTypeDefinition]
 
     let tableView: UITableView
+
+    var _cellsOnScreen: [IndexPathKey: UITableViewCell] = [:]
 
     init(cellTypes: [CellTypeDefinition], tableView: UITableView) {
         self.cellTypes = cellTypes
@@ -53,7 +47,7 @@ public final class TableViewShim: NSObject {
 
 
     func newViewModelWithChangeset(newViewModel: TableViewModel, changeSet: Changeset) {
-        self._tableViewModel = newViewModel
+        self.tableViewModel = newViewModel
 
         switch changeSet {
         case let .Delete(indexPath):
@@ -67,7 +61,9 @@ public final class TableViewShim: NSObject {
                 withRowAnimation: .Automatic
             )
         case .RefreshOnly:
-            self.tableView.reloadData()
+            for (indexPathKey, cell) in self._cellsOnScreen {
+                self.tableViewModel?[indexPathKey.indexPath].applyViewModelToCell(cell)
+            }
         }
     }
 
@@ -76,35 +72,42 @@ public final class TableViewShim: NSObject {
 extension TableViewShim: UITableViewDataSource, UITableViewDelegate {
 
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self._tableViewModel.sections.count
+        return self.tableViewModel.sections.count
     }
 
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellViewModel = self._tableViewModel[indexPath]
+        let cellViewModel = self.tableViewModel[indexPath]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellViewModel.cellIdentifier) ?? UITableViewCell()
         cellViewModel.applyViewModelToCell(cell)
+
+        self._cellsOnScreen[indexPath.key] = cell
 
         return cell
     }
 
+    public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        self._cellsOnScreen.removeValueForKey(indexPath.key)
+    }
+
+
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self._tableViewModel.sections[section].cells.count
+        return self.tableViewModel.sections[section].cells.count
     }
 
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self._tableViewModel.sections[section].sectionHeaderTitle
+        return self.tableViewModel.sections[section].sectionHeaderTitle
     }
 
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return self._tableViewModel.sections[section].sectionFooterTitle
+        return self.tableViewModel.sections[section].sectionFooterTitle
     }
 
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return self._tableViewModel[indexPath].canEdit
+        return self.tableViewModel[indexPath].canEdit
     }
 
     public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        self._tableViewModel[indexPath].commitEditingClosure?(indexPath)
+        self.tableViewModel[indexPath].commitEditingClosure?(indexPath)
     }
 
     public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {

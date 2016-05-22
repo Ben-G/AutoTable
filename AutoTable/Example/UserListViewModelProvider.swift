@@ -18,14 +18,17 @@ func tableViewModelForUserList(users: [User], deleteClosure: CommitEditingClosur
 
 func viewModelForUser(user: User, deleteClosure: CommitEditingClosure) -> TableViewCellModel {
 
-    func applyViewModelToCell(cell: UITableViewCell) {
+    func applyViewModelToCell(cell: UITableViewCell, user: Any) {
         guard let cell = cell as? UserCell else { return }
+        guard let user = user as? User else { return }
+
         cell.nameLabel.text = user.username
     }
 
     return TableViewCellModel(
         cellIdentifier: "UserCell",
         applyViewModelToCell: applyViewModelToCell,
-        commitEditingClosure: deleteClosure
+        commitEditingClosure: deleteClosure,
+        customData: user
     )
 }
