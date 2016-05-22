@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yG6-YU-vQG">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--User List View Controller-->
+        <scene sceneID="jYd-3e-ANh">
+            <objects>
+                <viewController id="yG6-YU-vQG" customClass="UserListViewController" customModule="AutoTable" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FLy-qK-G2D"/>
+                        <viewControllerLayoutGuide type="bottom" id="yrM-9f-6sy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EAT-rC-K4u">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgO-bX-o8d">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="xaB-dV-2cx">
+                                        <barButtonItem key="rightBarButtonItem" title="Add" id="qjJ-YY-fmS">
+                                            <connections>
+                                                <action selector="addUser:" destination="yG6-YU-vQG" id="zMI-4X-YTu"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pZc-3c-6Lh">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pZc-3c-6Lh" secondAttribute="trailing" id="Hpq-5H-7yn"/>
+                            <constraint firstItem="kgO-bX-o8d" firstAttribute="leading" secondItem="EAT-rC-K4u" secondAttribute="leading" id="MP1-Yq-Zfa"/>
+                            <constraint firstItem="kgO-bX-o8d" firstAttribute="top" secondItem="EAT-rC-K4u" secondAttribute="top" id="PMA-fs-oLR"/>
+                            <constraint firstItem="pZc-3c-6Lh" firstAttribute="top" secondItem="kgO-bX-o8d" secondAttribute="bottom" id="Tap-6r-W1c"/>
+                            <constraint firstItem="yrM-9f-6sy" firstAttribute="top" secondItem="pZc-3c-6Lh" secondAttribute="bottom" id="am7-Pe-6Ry"/>
+                            <constraint firstItem="kgO-bX-o8d" firstAttribute="width" secondItem="EAT-rC-K4u" secondAttribute="width" id="gcq-8v-QIO"/>
+                            <constraint firstItem="pZc-3c-6Lh" firstAttribute="leading" secondItem="EAT-rC-K4u" secondAttribute="leading" id="rKi-WX-Fhb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RnC-G4-2mS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="555" y="451"/>
+        </scene>
+    </scenes>
+</document>

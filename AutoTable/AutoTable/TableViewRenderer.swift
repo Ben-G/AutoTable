@@ -9,19 +9,17 @@
 import UIKit
 
 enum Changeset {
+    case Add(NSIndexPath)
     case Delete(NSIndexPath)
 }
 
-protocol Renderer {
-    var view: UIView { get }
-}
 
 struct CellTypeDefinition {
     let nibFilename: String
     let cellIdentifier: String
 }
 
-public final class TableViewRenderer: UIView, Renderer {
+public final class TableViewRenderer: UIView {
 
     var view: UIView { return self }
 
@@ -68,7 +66,15 @@ public final class TableViewRenderer: UIView, Renderer {
 
         switch changeSet {
         case let .Delete(indexPath):
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            self.tableView.deleteRowsAtIndexPaths(
+                [indexPath],
+                withRowAnimation: .Automatic
+            )
+        case let .Add(indexPath):
+            self.tableView.insertRowsAtIndexPaths(
+                [indexPath],
+                withRowAnimation: .Automatic
+            )
         }
     }
 

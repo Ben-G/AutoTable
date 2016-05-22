@@ -8,27 +8,24 @@
 
 import UIKit
 
-func tableViewModelForUserList(users: [User]) -> TableViewModel {
+func tableViewModelForUserList(users: [User], deleteClosure: CommitEditingClosure) -> TableViewModel {
     return TableViewModel(sections: [
-        TableViewSectionModel(cells: users.map(viewModelForUser))
+        TableViewSectionModel(cells:
+            users.map { viewModelForUser($0, deleteClosure: deleteClosure) }
+        )
     ])
 }
 
-func viewModelForUser(user: User) -> TableViewCellModel {
+func viewModelForUser(user: User, deleteClosure: CommitEditingClosure) -> TableViewCellModel {
 
     func applyViewModelToCell(cell: UITableViewCell) {
         guard let cell = cell as? UserCell else { return }
         cell.nameLabel.text = user.username
     }
 
-    func commitEditingClosure(indexPath: NSIndexPath) {
-//        actionHandler.deleteUser(indexPath)
-        print(indexPath)
-    }
-
     return TableViewCellModel(
         cellIdentifier: "UserCell",
         applyViewModelToCell: applyViewModelToCell,
-        commitEditingClosure: commitEditingClosure
+        commitEditingClosure: deleteClosure
     )
 }

@@ -19,6 +19,7 @@
 		2550A9081CF123DE004EA96E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2550A9071CF123DE004EA96E /* User.swift */; };
 		2550A90B1CF124DC004EA96E /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2550A90A1CF124DC004EA96E /* UserCell.swift */; };
 		2550A90D1CF1252D004EA96E /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2550A90C1CF1252D004EA96E /* UserCell.xib */; };
+		2550A90F1CF13278004EA96E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2550A90E1CF13278004EA96E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		2550A9071CF123DE004EA96E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Example/User.swift; sourceTree = "<group>"; };
 		2550A90A1CF124DC004EA96E /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		2550A90C1CF1252D004EA96E /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		2550A90E1CF13278004EA96E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Example/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				2550A8FB1CF122AF004EA96E /* AutoTable */,
 				2550A8DF1CF121D4004EA96E /* AppDelegate.swift */,
 				2550A8E11CF121D4004EA96E /* UserListViewController.swift */,
+				2550A90E1CF13278004EA96E /* Main.storyboard */,
 				2550A8E61CF121D4004EA96E /* Assets.xcassets */,
 				2550A8E81CF121D4004EA96E /* LaunchScreen.storyboard */,
 				2550A8EB1CF121D4004EA96E /* Info.plist */,
@@ -171,6 +174,7 @@
 				2550A90D1CF1252D004EA96E /* UserCell.xib in Resources */,
 				2550A8EA1CF121D4004EA96E /* LaunchScreen.storyboard in Resources */,
 				2550A8E71CF121D4004EA96E /* Assets.xcassets in Resources */,
+				2550A90F1CF13278004EA96E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
