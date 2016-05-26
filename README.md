@@ -2,7 +2,22 @@
 
 This repo demonstrates how UIKIt APIs can be wrapped with a declarative API layer. The `UITableView` API is used as an example.
 The approach taken in this example allows us to describe table views in terms of simple data models instead of through implementation of `UITableViewDataSource` or `UITableViewDelegate`.
-This makes the UI code is easier to read and less redundant.
+This improves the UI code in several ways:
+- It becomes easier to reason about
+- It becomes less redundant
+- It becomes easy to test
+
+Using the wraper API from this repo table views can be described in terms of a pure function that produces a description of a table view based on well defined input data:
+
+```swift
+func tableViewModelForUserList(users: [User]) -> TableViewModel {
+    return TableViewModel(sections: [
+        TableViewSectionModel(cells:
+            users.map { viewModelForUser($0) }
+        )
+    ])
+}
+```
 
 ##Example
 
