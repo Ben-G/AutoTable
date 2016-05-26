@@ -38,10 +38,12 @@ class UserListViewController: UIViewController {
     // MARK: Table Changes
 
     @IBAction func addUser(sender: AnyObject) {
+        // Update underlying data source
         self.users.append(
             User(username: NSUUID().UUIDString)
         )
 
+        // Update UI
         self.tableViewRenderer.newViewModelWithChangeset(
             tableViewModelForUserList(
                 users,
