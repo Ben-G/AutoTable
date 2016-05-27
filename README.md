@@ -1,6 +1,9 @@
 #About
 
 This repo demonstrates how UIKIt APIs can be wrapped with a declarative API layer. The `UITableView` API is used as an example.
+
+⚠️ This repo represents an example, but isn't a library in itself. E.g. it currently does not include any tests. ⚠️
+
 The approach taken in this example allows us to describe table views in terms of simple data models instead of through implementation of `UITableViewDataSource` or `UITableViewDelegate`.
 This improves the UI code in several ways:
 - It becomes easier to reason about
