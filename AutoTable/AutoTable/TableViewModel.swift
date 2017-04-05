@@ -17,7 +17,7 @@ struct TableViewModel {
         self.sections = sections
     }
 
-    subscript(indexPath: NSIndexPath) -> TableViewCellModel {
+    subscript(indexPath: IndexPath) -> TableViewCellModel {
         return self.sections[indexPath.section].cells[indexPath.row]
     }
 }
