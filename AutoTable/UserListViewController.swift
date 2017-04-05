@@ -37,10 +37,10 @@ class UserListViewController: UIViewController {
 
     // MARK: Table Changes
 
-    @IBAction func addUser(sender: AnyObject) {
+    @IBAction func addUser(_ sender: AnyObject) {
         // Update underlying data source
         self.users.append(
-            User(username: NSUUID().UUIDString)
+            User(username: UUID().uuidString)
         )
 
         // Update UI
@@ -49,26 +49,26 @@ class UserListViewController: UIViewController {
                 users,
                 deleteClosure: deleteUser
             ),
-            changeSet: .Add(NSIndexPath(
-                forRow: self.users.count - 1,
-                inSection: 0
+            changeSet: .add(IndexPath(
+                row: self.users.count - 1,
+                section: 0
             ))
         )
     }
 
-    func deleteUser(indexPath: NSIndexPath) {
-        self.users.removeAtIndex(indexPath.row)
+    func deleteUser(_ indexPath: IndexPath) {
+        self.users.remove(at: indexPath.row)
 
         self.tableViewRenderer.newViewModelWithChangeset(
             tableViewModelForUserList(
                 users,
                 deleteClosure: deleteUser
             ),
-            changeSet: .Delete(indexPath)
+            changeSet: .delete(indexPath)
         )
     }
 
-    @IBAction func renameAll(sender: AnyObject) {
+    @IBAction func renameAll(_ sender: AnyObject) {
         self.users = self.users.map { _ in User(username: "New Name") }
 
         self.tableViewRenderer.newViewModelWithChangeset(
@@ -76,7 +76,7 @@ class UserListViewController: UIViewController {
                 self.users,
                 deleteClosure: deleteUser
             ),
-            changeSet: .RefreshOnly
+            changeSet: .refreshOnly
         )
     }
 

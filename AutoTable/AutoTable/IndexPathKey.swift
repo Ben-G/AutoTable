@@ -19,9 +19,9 @@ struct IndexPathKey: Hashable {
     let row: Int
     let section: Int
     let hashValue: Int
-    var indexPath: NSIndexPath { return NSIndexPath(forRow: self.row, inSection: self.section) }
+    var indexPath: IndexPath { return IndexPath(row: self.row, section: self.section) }
 
-    init(indexPath: NSIndexPath) {
+    init(indexPath: IndexPath) {
         self.row = indexPath.row
         self.section = indexPath.section
         /*
@@ -37,7 +37,7 @@ func == (lhs: IndexPathKey, rhs: IndexPathKey) -> Bool {
     return lhs.row == rhs.row && lhs.section == rhs.section
 }
 
-extension NSIndexPath {
+extension IndexPath {
     var key: IndexPathKey {
         return IndexPathKey(indexPath: self)
     }
