@@ -9,9 +9,9 @@
 import UIKit
 
 enum Changeset {
-    case Add(NSIndexPath)
-    case Delete(NSIndexPath)
-    case RefreshOnly
+    case add(IndexPath)
+    case delete(IndexPath)
+    case refreshOnly
 }
 
 
@@ -36,7 +36,7 @@ public final class TableViewShim: NSObject {
 
         for cellType in cellTypes {
             let nibFile = UINib(nibName: cellType.cellIdentifier, bundle: nil)
-            self.tableView.registerNib(nibFile, forCellReuseIdentifier: cellType.cellIdentifier)
+            self.tableView.register(nibFile, forCellReuseIdentifier: cellType.cellIdentifier)
         }
 
         super.init()
@@ -46,21 +46,21 @@ public final class TableViewShim: NSObject {
     }
 
 
-    func newViewModelWithChangeset(newViewModel: TableViewModel, changeSet: Changeset) {
+    func newViewModelWithChangeset(_ newViewModel: TableViewModel, changeSet: Changeset) {
         self.tableViewModel = newViewModel
 
         switch changeSet {
-        case let .Delete(indexPath):
-            self.tableView.deleteRowsAtIndexPaths(
-                [indexPath],
-                withRowAnimation: .Automatic
+        case let .delete(indexPath):
+            self.tableView.deleteRows(
+                at: [indexPath],
+                with: .automatic
             )
-        case let .Add(indexPath):
-            self.tableView.insertRowsAtIndexPaths(
-                [indexPath],
-                withRowAnimation: .Automatic
+        case let .add(indexPath):
+            self.tableView.insertRows(
+                at: [indexPath],
+                with: .automatic
             )
-        case .RefreshOnly:
+        case .refreshOnly:
             for (indexPathKey, cell) in self._cellsOnScreen {
                 self.tableViewModel?[indexPathKey.indexPath].applyViewModelToCell(cell)
             }
@@ -71,13 +71,13 @@ public final class TableViewShim: NSObject {
 
 extension TableViewShim: UITableViewDataSource, UITableViewDelegate {
 
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewModel.sections.count
     }
 
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellViewModel = self.tableViewModel[indexPath]
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellViewModel.cellIdentifier) ?? UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier) ?? UITableViewCell()
         cellViewModel.applyViewModelToCell(cell)
 
         self._cellsOnScreen[indexPath.key] = cell
@@ -85,36 +85,36 @@ extension TableViewShim: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-    public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        self._cellsOnScreen.removeValueForKey(indexPath.key)
+    public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self._cellsOnScreen.removeValue(forKey: indexPath.key)
     }
 
 
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableViewModel.sections[section].cells.count
     }
 
-    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.tableViewModel.sections[section].sectionHeaderTitle
     }
 
-    public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return self.tableViewModel.sections[section].sectionFooterTitle
     }
 
-    public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return self.tableViewModel[indexPath].canEdit
     }
 
-    public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         self.tableViewModel[indexPath].commitEditingClosure?(indexPath)
     }
 
-    public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
     }
 

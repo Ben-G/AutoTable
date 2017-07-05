@@ -1,4 +1,4 @@
-#About
+# About
 
 This repo demonstrates how UIKIt APIs can be wrapped with a declarative API layer. The `UITableView` API is used as an example.
 
@@ -22,7 +22,7 @@ func tableViewModelForUserList(users: [User]) -> TableViewModel {
 }
 ```
 
-##Example
+## Example
 
 Let's dive right into an example of how the declarative API can be used. This repo provides `TableViewModel`, `TableViewSectionModel` and `TableViewCellModel` to describe what a table view should look like. These types are simple structs.
 
@@ -83,7 +83,7 @@ This setup code provides the `TableViewShim` with the definition of where to fin
 
 With all this in place the table view content will be displayed on screen - without requiring us to implement a large amount of protocol requirements.
 
-##Updating the Table View
+## Updating the Table View
 
 Ideally we would simply assign a new `TableViewModel` to the `TableViewShim` in order to update the UI. In practice this requires quite some effort as we need to compare the old to the new model in order to detect & animate the changes. For this automatic, advanced approach check out [my expirement on a truly declarative UI layer that reacts automatically](https://github.com/Ben-G/UILib) which has support for an auto-updating table view.
 
@@ -110,8 +110,8 @@ Here's an example of how to add an entry to a user list:
         ))
     )
 }
-``` 
+```
 
-#Beyond This Example
+# Beyond This Example
 
 It would be great to have a truly declarative view layer on top of UIKit that works like Facebook's [React](https://github.com/facebook/react) and automatically updates the UI whenever the description of the UI changes. I'm experimenting with this approach in the [UILib repository](https://github.com/Ben-G/UILib).

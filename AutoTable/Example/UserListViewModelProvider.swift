@@ -8,7 +8,7 @@
 
 import UIKit
 
-func tableViewModelForUserList(users: [User], deleteClosure: CommitEditingClosure) -> TableViewModel {
+func tableViewModelForUserList(_ users: [User], deleteClosure: @escaping CommitEditingClosure) -> TableViewModel {
     return TableViewModel(sections: [
         TableViewSectionModel(cells:
             users.map { viewModelForUser($0, deleteClosure: deleteClosure) }
@@ -16,9 +16,9 @@ func tableViewModelForUserList(users: [User], deleteClosure: CommitEditingClosur
     ])
 }
 
-func viewModelForUser(user: User, deleteClosure: CommitEditingClosure) -> TableViewCellModel {
+func viewModelForUser(_ user: User, deleteClosure: @escaping CommitEditingClosure) -> TableViewCellModel {
 
-    func applyViewModelToCell(cell: UITableViewCell, user: Any) {
+    func applyViewModelToCell(_ cell: UITableViewCell, user: Any) {
         guard let cell = cell as? UserCell else { return }
         guard let user = user as? User else { return }
 

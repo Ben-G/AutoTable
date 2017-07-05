@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias CommitEditingClosure = (NSIndexPath) -> Void
+typealias CommitEditingClosure = (IndexPath) -> Void
 
 struct TableViewCellModel {
     let cellIdentifier: String
@@ -19,7 +19,7 @@ struct TableViewCellModel {
 
     init(
         cellIdentifier: String,
-        applyViewModelToCell: (UITableViewCell, Any) -> Void,
+        applyViewModelToCell: @escaping (UITableViewCell, Any) -> Void,
         commitEditingClosure: CommitEditingClosure? = nil,
         customData: Any
     ) {
@@ -32,7 +32,7 @@ struct TableViewCellModel {
 }
 
 extension TableViewCellModel {
-    func applyViewModelToCell(cell: UITableViewCell) {
+    func applyViewModelToCell(_ cell: UITableViewCell) {
         self.applyViewModelToCell(cell, self.customData)
     }
 }
